@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>picture_component</title>
+</head>
+<body>
+
+	<template id="pictureTpl">
+
+		<style>
+			img.pictureProfile {
+				width: 120px;
+				height: 120px;
+				border-radius: 50%;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			}
+
+		</style>
+
+		<img class="pictureProfile" alt="picture_profile">
+
+	</template>
+	
+	<contact-picture></contact-picture>
+	<script>
+		(function(customElement){
+			'use strict';
+
+			class ContactPicture extends HTMLElement {
+
+				constructor(){
+
+					super();
+					const tplPicture = document.querySelector('template#pictureTpl');
+					const shadowRoot = this.attachShadow({mode:'open'});
+					shadowRoot.appendChild(
+						document.importNode(tplPicture.content,true)
+					);
+				}
+
+				get imgSrc (){
+					return this.getAttribute('img-src');
+				}
+
+				set imgSrc(val){
+
+					if(val){
+						this.setAttribute('img-src',val);
+					}
+					else {
+						this.setAttribute('img-src',
+							'../assets/img/default.jpg');
+					}
+
+				}
+
+				connectedCallback(){
+					console.log('connected picture');
+
+					//set src 
+					this.imgSrc = this.imgSrc
+					const img = this.shadowRoot.querySelector('.pictureProfile');
+					console.log('src set ? :',this.imgSrc);
+					img.setAttribute('src',this.imgSrc);
+
+				}
+
+				disconnectedCallback(){
+					console.log('picture gone');
+				}
+			}
+
+			customElements.define('contact-picture',ContactPicture);
+		})(window.customElements);
+	</script>
+
+
+	
+</body>
+</html>

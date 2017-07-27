@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>info</title>
+</head>
+<body>
+
+	<template id="infoTpl">
+		
+		<style>
+			ul.listInfo {
+				list-style: none;
+			}
+
+			li.item {
+				margin-bottom: 5px;
+				color:red;
+			}
+
+		</style>
+
+		<ul class="listInfo">
+			<li class="item">
+				<strong>
+					Nombre: 
+				</strong>
+				<slot name="name"></slot>
+
+			</li>
+
+			<li class="item">
+				<strong>
+					Edad: 
+				</strong>
+				<slot name="age"></slot>
+
+			</li>
+
+			<li class="item">
+				<strong>
+					Email: 
+				</strong>
+				<slot name="email"></slot>
+
+			</li>				
+
+		</ul>
+		
+	</template>
+	
+	<contact-info>
+		<span slot="name">German</span>
+		<span slot="age">25 años</span>
+		<span slot="email">german.martinez@ironbit.com.mx</span>
+
+	</contact-info>
+
+	<script>
+		(function(customElements){
+			
+			class ContactInfo extends HTMLElement {
+				
+				constructor() {
+					super();
+					const shadowRoot = this.attachShadow({mode:'open'});
+					const tplInfo =  document.querySelector('template#infoTpl');
+
+					shadowRoot.appendChild(
+						document.importNode(tplInfo.content,true)
+					);
+				}
+
+				//setters and geters
+				get contactName(){
+					return this.getAttribute('contact-name');
+				}
+
+				set contactName(val){
+					if(val){
+						this.setAttribute('contact-name',val);
+					}else {
+						this.setAttribute('contact-name','No definido');						
+					}
+				}
+
+				get contactAge(){
+					return this.getAttribute('contact-age');
+				}
+
+				set contactAge(val){
+					if(val){
+						this.setAttribute('contact-age',val);
+					}else {
+						this.setAttribute('contact-age','No definida');						
+					}
+				}
+
+				get contactEmail(){
+					return this.getAttribute('contact-email');
+				}
+
+				set contactEmail(val){
+					if(val){
+						this.setAttribute('contact-email',val);
+					}else {
+						this.setAttribute('contact-email','No definido');						
+					}
+				}
+
+				connectedCallback() {
+					console.log('connected info ...');
+				}
+
+				disconnectedCallback(){
+					console.log('disconnected info');
+				}
+			}
+
+			//set in custom elements 
+
+			customElements.define('contact-info',ContactInfo);
+		})(window.customElements);
+	</script>
+
+
+	
+</body>
+</html>
