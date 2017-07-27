@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>info</title>
-</head>
-<body>
+
 
 	<template id="infoTpl">
 		
@@ -19,6 +13,10 @@
 			}
 
 		</style>
+
+		<strong>
+			Informacion personal
+		</strong>
 
 		<ul class="listInfo">
 			<li class="item">
@@ -64,7 +62,7 @@
 				constructor() {
 					super();
 					const shadowRoot = this.attachShadow({mode:'open'});
-					const tplInfo =  document.querySelector('template#infoTpl');
+					const tplInfo =  document.currentScript.ownerDocument.querySelector('template#infoTpl');
 
 					shadowRoot.appendChild(
 						document.importNode(tplInfo.content,true)
@@ -122,8 +120,3 @@
 			customElements.define('contact-info',ContactInfo);
 		})(window.customElements);
 	</script>
-
-
-	
-</body>
-</html>

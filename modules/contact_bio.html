@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>bio component</title>
-</head>
-<body>
+
 	
 	<template id="contactBio">
 		
@@ -15,15 +9,15 @@
 			}
 
 		</style>
-
+		<strong>About me</strong>
 		<p class="bio">
 			
 		</p>
 
 	</template>
 
-	<contact-bio content-bio="im cool :V">
-	</contact-bio>
+<!-- 	<contact-bio content-bio="im cool :V">
+	</contact-bio> -->
 
 
 	<script>
@@ -33,7 +27,7 @@
 				constructor() {
 					super();
 					const shadowRoot = this.attachShadow({mode:'open'});
-					const tplBio = document.querySelector('template#contactBio');
+					const tplBio = document.currentScript.ownerDocument.querySelector('template#contactBio');
 
 					shadowRoot.appendChild(
 						document.importNode(tplBio.content,true)
@@ -69,7 +63,3 @@
 			customElements.define('contact-bio',ContactBio);
 		})(window.customElements);
 	</script>
-
-
-</body>
-</html>

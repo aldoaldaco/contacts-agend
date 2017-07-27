@@ -4,9 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="import" href="modules/contact_picture.html"/>
+	<link rel="import" href="modules/contact_bio.html"/>
+	<link rel="import" href="modules/contact_info.html"/>  
+	<link rel="import" href="modules/contact_layout_profile.html"/>
+	<link rel="import" href="assets/libs.html">
     <title>app</title>
+
 </head>
 <body>
-    <h1>Develop branch</h1>
+    
+    <header>
+    	<h1>Contactos de mis amigas</h1>
+    </header>
+
+    <style>
+
+    	.mainContainer {
+			flex: 1 100%;
+		    width: 100%;
+		    display: inline-flex;
+
+    	}
+
+    	.aside {
+			border: 1px solid red;
+			width: 15%;
+			margin: 0;
+			display: inline-flex;
+			padding: 10px;
+			padding: 20px;
+
+
+    	}
+
+    	.contactDrawer {
+		    flex: 1 70%;
+		    border: 1px solid green;
+		    display: inline-flex;
+		    padding: 20px;
+    	}
+    	
+    </style>
+
+    <div class="mainContainer">
+    	
+    	<div class="aside">
+    		<p>dfsfdsdfsdf</p>
+    	</div>
+
+    	<div class="contactDrawer">
+	    	<contact-profile-draw>
+
+	    			<contact-picture slot="picture" img-src="http://img.providr.com/all-images/mia-khalifa-photos-again1.jpg"></contact-picture>
+	    			
+	    	   	
+		    		<contact-info slot="info">
+		    			<span slot="name">German</span>
+						<span slot="age">25 años</span>
+						<span slot="email">german.martinez@ironbit.com.mx</span>
+		    		</contact-info>
+	    			
+	    		
+
+	 
+	    			<contact-bio slot="bio" content-bio="ksdshkdfjshdkjfhskdjfhskdjfh"></contact-bio>
+	    			
+	    	</contact-profile-draw>    		
+    	</div>
+
+    </div>
+
 </body>
 </html>

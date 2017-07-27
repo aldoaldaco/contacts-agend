@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>picture_component</title>
-</head>
-<body>
+
 
 	<template id="pictureTpl">
 
@@ -14,6 +8,7 @@
 				height: 120px;
 				border-radius: 50%;
 				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+				margin:15px;
 			}
 
 		</style>
@@ -22,7 +17,7 @@
 
 	</template>
 	
-	<contact-picture></contact-picture>
+
 	<script>
 		(function(customElement){
 			'use strict';
@@ -32,7 +27,7 @@
 				constructor(){
 
 					super();
-					const tplPicture = document.querySelector('template#pictureTpl');
+					const tplPicture = document.currentScript.ownerDocument.querySelector('template#pictureTpl');
 					const shadowRoot = this.attachShadow({mode:'open'});
 					shadowRoot.appendChild(
 						document.importNode(tplPicture.content,true)
@@ -74,8 +69,3 @@
 			customElements.define('contact-picture',ContactPicture);
 		})(window.customElements);
 	</script>
-
-
-	
-</body>
-</html>
