@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <template id="contact-item">
+        <style>
+            div.contact-alias{
+                font-family: serif;
+                color: white;
+                border-radius: 3px;
+                height: 40px;
+                width: 100%;
+            }
+        </style>
+        <div class="contact-alias">
+            <slot name="alias">Nombre</slot>
+        </div>
+    </template>
+</head>
+<body>
+</body>
+<script>
+(function(doc,customElements){
+    'use strict';
+    class ContactItem extends HTMLElement {
+        static get observedAttributes() {
+            return ['clicked'];
+        }
+
+        constructor() {
+            super();
+            this.clicked = false;
+            const shadowRoot = this.attachShadow({mode: 'open'});
+            const template = document.currentScript.ownerDocument.querySelector('template');
+            const clone = document.importNode(template.content,true);
+            shadowRoot.appendChild(clone);
+        }
+
+        connectedCallback() {
+            this.addEventListener('click',this._onClick.bind(this));
+        }
+
+        attributeChangedCallback(name, oldVal, newVal) {
+            if(name === 'clicked') {
+              this.clicked = newVal;
+            }
+        }
+
+        _onClick(event) {
+            this.dispatchEvent(new CustomEvent('contact-clicked', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                    clicked: true
+                }
+            }));
+        }
+    }
+    customElements.define('contact-item', ContactItem);
+})(document, window.customElements);
+</script>
+</html>

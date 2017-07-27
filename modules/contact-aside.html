@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style media="screen">
+        body{
+            width: 100%;
+            height: 100%;
+
+        }
+    </style>
+    <link rel="import" href="contact.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <template id="contact-aside">
+        <style>
+            div.contact-aside{
+                height: 100%;
+                width: 100%;
+                background-color: red;
+            }
+        </style>
+        <div class="contact-aside">
+            <slot name="contact">Aside</slot>
+        </div>
+    </template>
+</head>
+<body>
+</body>
+<script>
+(function(customElements){
+    'use strict';
+    class ContactAside extends HTMLElement {
+        constructor() {
+            super();
+            const shadowRoot = this.attachShadow({mode: 'open'});
+            const template = document.querySelector('#contact-aside');
+            const clone = document.importNode(template.content,true);
+            shadowRoot.appendChild(clone);
+        }
+    }
+    customElements.define('contact-aside', ContactAside);
+})(window.customElements);
+(function(doc){
+    let ContactAside = customElements.get('contact-aside');
+    let contactAside = new ContactAside();
+    document.body.appendChild(contactAside);
+    const contacts = [
+        {name: 'aldo'},
+        {name: 'german'},
+        {name: 'gerardo'},
+        {name: 'alfonso'},
+        {name: 'ivan'},
+        {name: 'luis'},
+        {name: 'yoshua'}
+    ];
+    for(let i of contacts){
+        let ContactItem = customElements.get('contact-item');
+        let contactItem = new ContactItem();
+        contactItem.setAttribute("slot","contact");
+        let label = document.createElement("label");
+        label.setAttribute("slot","alias");
+        contactItem.innerHTML = i.name;
+        contactAside.appendChild(contactItem);
+    }
+    console.log(contactAside);
+})(document);
+</script>
+</html>
