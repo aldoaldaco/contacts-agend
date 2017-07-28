@@ -3,18 +3,32 @@
 	<template id="infoTpl">
 		
 		<style>
+
+			strong {
+				color:#424242;
+			}
+
+			strong.sectionName {
+				margin-top: 20px;
+				text-transform: uppercase;
+				font-size: 30px;
+				display: block;
+			}
+			
 			ul.listInfo {
 				list-style: none;
+				padding: 0;
 			}
 
 			li.item {
 				margin-bottom: 5px;
-				color:red;
+				font-size: 20px;				
 			}
+
 
 		</style>
 
-		<strong>
+		<strong class="sectionName">
 			Informacion personal
 		</strong>
 
@@ -23,7 +37,8 @@
 				<strong>
 					Nombre: 
 				</strong>
-				<slot name="name"></slot>
+				<span class="infoName"></span>
+				<!-- <slot name="name"></slot> -->
 
 			</li>
 
@@ -31,7 +46,8 @@
 				<strong>
 					Edad: 
 				</strong>
-				<slot name="age"></slot>
+				<span class="infoAge"></span>
+				<!-- <slot name="age"></slot> -->
 
 			</li>
 
@@ -39,7 +55,8 @@
 				<strong>
 					Email: 
 				</strong>
-				<slot name="email"></slot>
+				<span class="infoAge"></span>
+				<!-- <slot name="email"></slot> -->
 
 			</li>				
 
@@ -47,13 +64,6 @@
 		
 	</template>
 	
-<!-- 	<contact-info>
-		<span slot="name">German</span>
-		<span slot="age">25 años</span>
-		<span slot="email">german.martinez@ironbit.com.mx</span>
-
-	</contact-info> -->
-
 	<script>
 		(function(customElements){
 			

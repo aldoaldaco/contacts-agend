@@ -6,19 +6,24 @@
 
 		<style>
 			/* here goes styles */
+
+			:host {
+				width: 100%;
+			}
 			
-			/* testing styles shold be in component
-				only styling box sizes
-			*/
-			.container {
-				display: flex;
+			.profileDrawContainer {
+		    /* display: block; */
+				display: inline-flex;
 				width: 100%;
 				flex-wrap: wrap;
-
+		    /* flex: 1 50%; */
 			}
 
 			.pictureContainer {				
-						
+				flex: 1 30%;
+				width: 30%;
+				border: 1px
+
 			}
 
 			.infoContainer {
@@ -31,29 +36,22 @@
 				margin-top: 20px;
 
 			}
-
-			.container .bioContainer {
-				flex-direction: column;
-			}
-
-
+			
 
 		</style>
 		
-		<div class="container">
+		<div class="profileDrawContainer">
 
 			<div class="pictureContainer">
 				<slot name="picture"></slot>				
 			</div>
 
 			<div class="infoContainer">
-				<slot name="info"></slot>				
-			</div>
-
-			<div class="bioContainer">
+				<slot name="info"></slot>
+				<hr>
 				<slot name="bio"></slot>				
+
 			</div>
-			
 
 		</div>
 		
