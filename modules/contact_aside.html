@@ -1,0 +1,148 @@
+
+<link rel="import" href="contact_chips.html">
+
+<template id="chipComponent">
+
+	<style>
+		:host {
+			width: 100%;
+			display: block;
+			height: auto;
+		}
+
+		.chip {
+			height: 65px;
+			width: 100%;
+			display: block;
+			border-radius: 3px;
+			cursor: pointer;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			transition: 0.4s;
+			margin:10px 0;
+		}
+
+		.chipImage {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			margin-right:10px; 
+			margin-left: 10px;
+
+		}
+
+		.chipName {
+			font-size: 16px;
+			font-weight: bold;
+			color:#424242;
+		}
+		.chip:hover {
+			background-color: #F5F5F5;
+			transition: 0.4s;
+
+		}
+	</style>
+
+	<div class="containerChip">
+		
+	</div>
+	
+
+</template>
+
+<template id="asideTpl">
+	<style>
+		:host {
+			width: 100%;
+			display: block;
+		}
+
+		.asideComponent {
+			width: 100%;
+			display: block;
+			min-height:100%;
+			
+		}
+
+	</style>
+
+	<div class="asideComponent">
+		
+	</div>
+
+</template>
+
+<script>
+	(function(customElements){
+
+		class ContactAside extends HTMLElement {
+			
+			constructor(){
+				super();
+
+				const tplAside = document.currentScript.ownerDocument.querySelector('#asideTpl');
+				const shadowRoot = this.attachShadow({mode:'open'});
+
+				shadowRoot.appendChild(document.importNode(tplAside.content,true));
+
+				const contacts = [
+					{	id:0,
+						image:"assets/img/1.jpg",
+						name:'Contacto de prueba',
+						phone:'7352319309',
+						age:25,
+						bio:'Soy bien pro haciendo web components'
+					},
+
+					{	id:1,
+						image:"assets/img/1.jpg",
+						name:'Contacto de prueba',
+						phone:'7352319309',
+						age:25,
+						bio:'Soy bien pro haciendo web components'
+					},
+
+					{	id:2,
+						image:"assets/img/1.jpg",
+						name:'Contacto de prueba',
+						phone:'7352319309',
+						age:25,
+						bio:'Soy bien pro haciendo web components'
+					},
+
+					{	id:3,
+						image:"assets/img/1.jpg",
+						name:'Contacto de prueba',
+						phone:'7352319309',
+						age:25,
+						bio:'Soy bien pro haciendo web components'
+					}					
+				]
+
+			}
+
+			connectedCallback() {
+
+				console.log('connected callback');
+				const father = this.shadowRoot.querySelector('.asideComponent');
+				const customChip = customElements.get('contact-chip');
+
+				father.appendChild(new customChip());
+
+				console.log(document.body.querySelector('span.infoName'));
+
+				
+
+			}
+		}
+
+		customElements.define('contact-aside',ContactAside);
+		console.log('sssssssssss');
+
+
+
+
+	})(window.customElements);
+</script>

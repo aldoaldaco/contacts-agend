@@ -1,0 +1,46 @@
+body, header, h1, h2, h3, h4, h5 , h6,
+p {
+	margin:0;
+	padding: 0;
+}
+
+
+header {
+	height: 70px;
+    color: #FFF;
+    background-color: #2196F3;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+}
+
+h1 {
+	align-self: center;
+	margin-left: 30px;
+
+}
+
+
+.mainContainer {
+	flex: 1 100%;
+    width: 100%;
+    display: inline-flex;
+
+}
+
+.aside {
+	width: 15%;
+	margin: 0;
+	display: inline-flex;
+	padding: 10px;
+	padding: 20px;
+	border: 1px solid #424242;
+
+
+}
+
+.contactDrawer {
+    flex: 1 70%;
+    border: 1px solid green;
+    display: inline-flex;
+    padding: 20px;
+}

@@ -1,0 +1,78 @@
+
+
+	<template id="pictureTpl">
+
+		<style>
+			img.pictureProfile {
+				width: 340px;
+				height: 340px;
+				border-radius: 50%;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+				margin:15px;
+				transition: 0.3s;
+				margin: 10px auto;
+    			display: block;
+			}
+
+			img.pictureProfile:hover {
+				box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+			}
+
+		</style>
+
+		<img class="pictureProfile" alt="picture_profile">
+
+	</template>
+	
+
+	<script>
+		(function(customElement){
+			'use strict';
+
+			class ContactPicture extends HTMLElement {
+
+				constructor(){
+
+					super();
+					const tplPicture = document.currentScript.ownerDocument.querySelector('template#pictureTpl');
+					const shadowRoot = this.attachShadow({mode:'open'});
+					shadowRoot.appendChild(
+						document.importNode(tplPicture.content,true)
+					);
+				}
+
+				get imgSrc (){
+					return this.getAttribute('img-src');
+				}
+
+				set imgSrc(val){
+
+					if(val){
+						this.setAttribute('img-src',val);
+					}
+					else {
+						this.setAttribute('img-src',
+							'../assets/img/default.jpg');
+					}
+
+				}
+
+				connectedCallback(){
+					console.log('connected picture');
+
+					//set src 
+					this.imgSrc = this.imgSrc
+					const img = this.shadowRoot.querySelector('.pictureProfile');
+					console.log('src set ? :',this.imgSrc);
+					img.setAttribute('src',this.imgSrc);
+
+				}
+
+				disconnectedCallback(){
+					console.log('picture gone');
+				}
+			}
+
+			customElements.define('contact-picture',ContactPicture);
+		})(window.customElements);
+	</script>

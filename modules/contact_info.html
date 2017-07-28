@@ -1,0 +1,132 @@
+
+
+	<template id="infoTpl">
+		
+		<style>
+
+			strong {
+				color:#424242;
+			}
+
+			strong.sectionName {
+				margin-top: 20px;
+				text-transform: uppercase;
+				font-size: 30px;
+				display: block;
+			}
+			
+			ul.listInfo {
+				list-style: none;
+				padding: 0;
+			}
+
+			li.item {
+				margin-bottom: 5px;
+				font-size: 20px;				
+			}
+
+
+		</style>
+
+		<strong class="sectionName">
+			Informacion personal
+		</strong>
+
+		<ul class="listInfo">
+			<li class="item">
+				<strong>
+					Nombre: 
+				</strong>
+				<span class="infoName"></span>
+				<!-- <slot name="name"></slot> -->
+
+			</li>
+
+			<li class="item">
+				<strong>
+					Edad: 
+				</strong>
+				<span class="infoAge"></span>
+				<!-- <slot name="age"></slot> -->
+
+			</li>
+
+			<li class="item">
+				<strong>
+					Phone: 
+				</strong>
+				<span class="infoPhone"></span>
+				<!-- <slot name="email"></slot> -->
+
+			</li>				
+
+		</ul>
+		
+	</template>
+	
+	<script>
+		(function(customElements){
+			
+			class ContactInfo extends HTMLElement {
+				
+				constructor() {
+					super();
+					const shadowRoot = this.attachShadow({mode:'open'});
+					const tplInfo =  document.currentScript.ownerDocument.querySelector('template#infoTpl');
+
+					shadowRoot.appendChild(
+						document.importNode(tplInfo.content,true)
+					);
+				}
+
+				//setters and geters
+				get contactName(){
+					return this.getAttribute('contact-name');
+				}
+
+				set contactName(val){
+					if(val){
+						this.setAttribute('contact-name',val);
+					}else {
+						this.setAttribute('contact-name','No definido');						
+					}
+				}
+
+				get contactAge(){
+					return this.getAttribute('contact-age');
+				}
+
+				set contactAge(val){
+					if(val){
+						this.setAttribute('contact-age',val);
+					}else {
+						this.setAttribute('contact-age','No definida');						
+					}
+				}
+
+				get contactEmail(){
+					return this.getAttribute('contact-email');
+				}
+
+				set contactEmail(val){
+					if(val){
+						this.setAttribute('contact-email',val);
+					}else {
+						this.setAttribute('contact-email','No definido');						
+					}
+				}
+
+				connectedCallback() {
+					console.log('connected info ...');
+				}
+
+				disconnectedCallback(){
+					console.log('disconnected info');
+				}
+			}
+
+			//set in custom elements 
+
+			customElements.define('contact-info',ContactInfo);
+		})(window.customElements);
+	</script>

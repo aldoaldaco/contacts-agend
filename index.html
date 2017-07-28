@@ -4,9 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<link rel="import" href="modules/contact_picture.html"/>
+	<link rel="import" href="modules/contact_bio.html"/>
+	<link rel="import" href="modules/contact_info.html"/>  
+	<link rel="import" href="modules/contact_layout_profile.html"/>
+    <link rel="stylesheet" href="modules/contact_chips.html"/>
+	<link rel="import" href="modules/contact_aside.html">
+
+	<link rel="import" href="assets/libs.html">
+    <title>Contactos</title>
+
 </head>
 <body>
+    
+    <header>
+    	<h1>Lista de contactos</h1>
+    </header>
+
+
+    <div class="mainContainer">
+    	
+    	<div class="aside">
+    		<contact-aside>
+    	</div>
+
+    	<div class="contactDrawer">
+	    	<contact-profile-draw>
+
+	    			<contact-picture slot="picture" img-src=""></contact-picture>
+	    			
+	    	   	
+		    		<contact-info slot="info">
+		    		</contact-info>
+	    				 
+	    			<contact-bio slot="bio" content-bio=""></contact-bio>
+	    			
+	    	</contact-profile-draw>    		
+    	</div>
+
+    </div>
+
+
+
 
 </body>
 </html>

@@ -1,0 +1,110 @@
+
+
+	<!-- Here goes import of others 3 components {picture component,info component,bio component} -->
+
+	<template id="profileDrawer">
+
+		<style>
+			/* here goes styles */
+
+			:host {
+				width: 100%;
+			}
+			
+			.profileDrawContainer {
+		    /* display: block; */
+				display: inline-flex;
+				width: 100%;
+				flex-wrap: wrap;
+		    /* flex: 1 50%; */
+			}
+
+			.pictureContainer {				
+				flex: 1 30%;
+				width: 30%;
+				border: 1px
+
+			}
+
+			.infoContainer {
+				flex: 1 70%;
+
+			}
+
+			.bioContainer {
+				flex:1 100%;
+				margin-top: 20px;
+
+			}
+			
+
+		</style>
+		
+		<div class="profileDrawContainer">
+
+			<div class="pictureContainer">
+				<slot name="picture"></slot>				
+			</div>
+
+			<div class="infoContainer">
+				<slot name="info"></slot>
+				<hr>
+				<slot name="bio"></slot>				
+
+			</div>
+
+		</div>
+		
+	</template>
+
+<!-- 	<contact-profile-draw>
+
+		<img slot="picture" src="http://img.providr.com/all-images/mia-khalifa-photos-again1.jpg" alt="mia">
+
+		<p slot="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem libero fuga voluptates nesciunt vitae corporis, voluptas veritatis maxime doloribus cupiditate, ea est quae vero debitis, optio consequuntur voluptatum cum adipisci!</p>
+
+		<ul slot="info">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			
+		</ul>
+
+	</contact-profile-draw> -->
+
+
+	<script>
+		(function(customElements){
+
+
+			class ContactProfileDraw extends HTMLElement {
+
+				constructor() {
+					super();
+
+					const tpl = document.currentScript.ownerDocument.querySelector('template#profileDrawer');
+
+					const shadowRoot = this.attachShadow({mode:'open'});
+
+					shadowRoot.appendChild(
+						document.importNode(tpl.content,true)
+					);
+
+					// here gets from customElements three components
+				}
+
+				connectedCallback() {
+					console.log('connected');
+				}
+
+				disconnectedCallback() {
+					console.log('im gone');
+				}
+			}
+
+			customElements.define('contact-profile-draw',ContactProfileDraw);
+
+
+		}
+		)(window.customElements);
+	</script>

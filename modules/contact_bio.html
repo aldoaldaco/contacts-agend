@@ -1,0 +1,74 @@
+
+	
+	<template id="contactBio">
+		
+		<style>
+			strong.sectionName {
+			    margin-top: 20px;
+			    text-transform: uppercase;
+			    font-size: 30px;
+			    display: block;
+			    color: #424242;
+			}
+
+			p.bio {
+				font-family: sans-serif;
+				width: 100%;
+				font-size: 20px;
+			}
+
+		</style>
+		<strong class="sectionName">Acerca de mi</strong>
+		<p class="bio">
+			
+		</p>
+
+	</template>
+
+<!-- 	<contact-bio content-bio="im cool :V">
+	</contact-bio> -->
+
+
+	<script>
+		(function(customElements){
+			class ContactBio extends HTMLElement {
+				
+				constructor() {
+					super();
+					const shadowRoot = this.attachShadow({mode:'open'});
+					const tplBio = document.currentScript.ownerDocument.querySelector('template#contactBio');
+
+					shadowRoot.appendChild(
+						document.importNode(tplBio.content,true)
+					);
+
+				}
+
+				//setters and getters 
+
+				get contentBio () {
+					return this.getAttribute('content-bio');
+				}
+
+				set contentBio (val) {
+					if(val){
+						this.getAttribute('content-bio',val);
+					} else {
+						this.setAttribute('contentBio','No bio info')
+					}
+				}
+
+				connectedCallback(){
+					console.log('connected bio component');
+					this.contentBio = this.contentBio;
+					const bio = this.shadowRoot.querySelector('p.bio');
+					bio.innerHTML = this.contentBio;
+				}
+
+				disconnectedCallback(){
+					console.log('disconnected callback bio');
+				}
+			}
+			customElements.define('contact-bio',ContactBio);
+		})(window.customElements);
+	</script>

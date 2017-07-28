@@ -1,0 +1,183 @@
+
+
+
+<script>
+	(function(customElements){
+
+		class ContactChip extends HTMLElement {
+			
+			constructor(){
+				super();
+				const shadowRoot = this.attachShadow({mode:'open'});
+				const tplChip = document.currentScript.ownerDocument.querySelector('template#chipComponent');
+				shadowRoot.appendChild(tplChip.content,true)
+
+			}
+
+			//setters and getters
+
+			// get chipSrc (){
+			// 	return this.getAttribute('chip-src');
+			// }
+
+			// set chipSrc(val){
+
+			// 	if(val){
+			// 		this.setAttribute('chip-src',val);
+			// 	}
+			// 	else {
+			// 		this.setAttribute('chip-src',
+			// 			'assets/img/default.jpg');
+			// 	}
+
+			// }
+
+			// get chipText (){
+			// 	return this.getAttribute('chip-text');
+			// }
+
+			// set chipText(val){
+
+			// 	if(val){
+			// 		this.setAttribute('chip-text',val);
+			// 	}
+			// 	else {
+			// 		this.setAttribute('chip-text',
+			// 			'desconocido');
+			// 	}
+
+			// }
+
+			// get chipId (){
+			// 	return number(this.getAttribute('chip-id'));
+			// }
+
+			// set chipId(val){
+
+			// 	if(val){
+			// 		this.setAttribute('chip-id',val);
+			// 	}
+			// 	else {
+			// 		this.setAttribute('chip-id',
+			// 			0);
+			// 	}
+
+			// }			
+
+			_setInfo(index,contacts){
+
+				const el = contacts[index];
+				const node  = document.querySelector('contact-info');
+
+				const nodeBio = document.querySelector('contact-bio');
+
+				const nodeImage = document.querySelector('contact-picture');
+
+				let name = node.shadowRoot.querySelector('span.infoName');
+				let age = node.shadowRoot.querySelector('span.infoAge');
+				let email = node.shadowRoot.querySelector('span.infoPhone');
+
+				let bioContent =  nodeBio.shadowRoot.querySelector('.bio')
+
+				let picture = nodeImage.shadowRoot.querySelector('.pictureProfile')
+
+				name.innerHTML = el.name;
+				age.innerHTML = el.age;
+				email.innerHTML = el.phone;
+				bioContent.innerHTML = el.bio;
+				picture.src = el.image;
+
+
+
+
+			}
+
+			connectedCallback() {
+
+				const contacts = [
+					{	id:0,
+						image:"assets/img/1.jpg",
+						name:'Mia',
+						phone:'2425343453',
+						age:25,
+						bio:'Soy monja y amo al pápa ,brijen hasta el matrimonio'
+					},
+
+					{	id:1,
+						image:"assets/img/2.jpg",
+						name:'Dillon',
+						phone:'345345345',
+						age:17,
+						bio:'Yo tambien soy Monja y comparto imagenes de piolin'
+					},
+
+					{	id:2,
+						image:"assets/img/3.jpg",
+						name:'Doña pelos',
+						phone:'7330345349',
+						age:29,
+						bio:'Soy bien pro haciendo web components'
+					},
+
+					{	id:3,
+						image:"assets/img/4.jpg",
+						name:'La Chupitos',
+						phone:'34534534',
+						age:15,
+						bio:'Me la paso todo el dia pegaga al shupe ...... oie cii'
+					}					
+				]
+
+				let container = this.shadowRoot.querySelector('.containerChip');
+
+
+
+				for (let contact of contacts){
+					let chip = document.createElement('div')
+					chip.classList.add('chip')
+					let img = document.createElement('img');
+					img.src = contact.image;
+					img.alt = contact.name;
+					img.classList.add('chipImage')
+					chip.setAttribute('data-index',contact.id);
+					let span = document.createElement('span');
+					span.classList.add('chipName');
+					span.innerHTML = contact.name;
+
+					chip.appendChild(img);
+					chip.appendChild(span);
+
+					chip.addEventListener('click',()=>{
+						this._setInfo(contact.id,contacts);
+					});
+
+
+
+					container.appendChild(chip);
+				}
+
+				this._setInfo(0,contacts);
+				// this.chipText = this.chipText;
+				// this.chipSrc = this.chipSrc;
+
+				// const container = this.shadowRoot.querySelector('.chip');
+				
+				// const img = this.shadowRoot.querySelector('.chipImage');
+				// img.src = this.chipSrc;
+
+				// const span = this.shadowRoot.querySelector('.chipName');
+				// span.innerHTML = this.chipText;
+
+				// container.addEventListener('click',this._sayHi.bind(this));
+
+
+			}		
+
+
+		}
+
+		customElements.define('contact-chip',ContactChip);
+
+
+	})(window.customElements);
+</script>
