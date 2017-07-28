@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Layout drawer profile</title>
-</head>
-<body>
+
 
 	<!-- Here goes import of others 3 components {picture component,info component,bio component} -->
 
@@ -12,40 +6,52 @@
 
 		<style>
 			/* here goes styles */
+
+			:host {
+				width: 100%;
+			}
 			
-			/* testing styles shold be in component
-				only styling box sizes
-			*/
-			.pictureContainer {
-				border: 1px solid red;
-				height: 100px;
-				width: 100px;
+			.profileDrawContainer {
+		    /* display: block; */
+				display: inline-flex;
+				width: 100%;
+				flex-wrap: wrap;
+		    /* flex: 1 50%; */
+			}
+
+			.pictureContainer {				
+				flex: 1 30%;
+				width: 30%;
+				border: 1px
+
 			}
 
 			.infoContainer {
-				border: 1px solid blue;
+				flex: 1 70%;
+
 			}
 
 			.bioContainer {
-				border: 1px solid green;
+				flex:1 100%;
+				margin-top: 20px;
+
 			}
+			
 
 		</style>
 		
-		<div class="profileSpace">
+		<div class="profileDrawContainer">
 
 			<div class="pictureContainer">
 				<slot name="picture"></slot>				
 			</div>
 
 			<div class="infoContainer">
-				<slot name="info"></slot>				
-			</div>
-
-			<div class="bioContainer">
+				<slot name="info"></slot>
+				<hr>
 				<slot name="bio"></slot>				
+
 			</div>
-			
 
 		</div>
 		
@@ -76,7 +82,7 @@
 				constructor() {
 					super();
 
-					const tpl = document.querySelector('template#profileDrawer');
+					const tpl = document.currentScript.ownerDocument.querySelector('template#profileDrawer');
 
 					const shadowRoot = this.attachShadow({mode:'open'});
 
@@ -88,7 +94,7 @@
 				}
 
 				connectedCallback() {
-					console.log('connected ');
+					console.log('connected');
 				}
 
 				disconnectedCallback() {
@@ -96,12 +102,9 @@
 				}
 			}
 
-			customElements.define('contact-profile-draw',ProfileDrawerComponent);
+			customElements.define('contact-profile-draw',ContactProfileDraw);
 
 
 		}
 		)(window.customElements);
 	</script>
-	
-</body>
-</html>
