@@ -64,18 +64,30 @@
 
 			// }			
 
-			_sayHi(index,contacts){
-				console.log(index,contacts,document);
-				const el = contacts[index];
+			_setInfo(index,contacts){
 
-				let name = document.body.querySelector('span.infoName');
-				let age = document.querySelector('span.infoAge');
-				let email = document.querySelector('span.infoEmail');
+				const el = contacts[index];
+				const node  = document.querySelector('contact-info');
+
+				const nodeBio = document.querySelector('contact-bio');
+
+				const nodeImage = document.querySelector('contact-picture');
+
+				let name = node.shadowRoot.querySelector('span.infoName');
+				let age = node.shadowRoot.querySelector('span.infoAge');
+				let email = node.shadowRoot.querySelector('span.infoPhone');
+
+				let bioContent =  nodeBio.shadowRoot.querySelector('.bio')
+
+				let picture = nodeImage.shadowRoot.querySelector('.pictureProfile')
 
 				name.innerHTML = el.name;
 				age.innerHTML = el.age;
-				email.innerHTML = el.email;
-				console.log(name);
+				email.innerHTML = el.phone;
+				bioContent.innerHTML = el.bio;
+				picture.src = el.image;
+
+
 
 
 			}
@@ -85,34 +97,34 @@
 				const contacts = [
 					{	id:0,
 						image:"assets/img/1.jpg",
-						name:'Chiki baby 1',
-						phone:'7352319309',
+						name:'Mia',
+						phone:'2425343453',
 						age:25,
-						bio:'Soy bien pro haciendo web components'
+						bio:'Soy monja y amo al pápa ,brijen hasta el matrimonio'
 					},
 
 					{	id:1,
-						image:"assets/img/1.jpg",
-						name:'chiki baby 2',
-						phone:'7352319309',
-						age:25,
-						bio:'Soy bien pro haciendo web components'
+						image:"assets/img/2.jpg",
+						name:'Dillon',
+						phone:'345345345',
+						age:17,
+						bio:'Yo tambien soy Monja y comparto imagenes de piolin'
 					},
 
 					{	id:2,
-						image:"assets/img/1.jpg",
-						name:'chiki baby 3',
-						phone:'7352319309',
-						age:25,
+						image:"assets/img/3.jpg",
+						name:'Doña pelos',
+						phone:'7330345349',
+						age:29,
 						bio:'Soy bien pro haciendo web components'
 					},
 
 					{	id:3,
-						image:"assets/img/1.jpg",
-						name:'Chiki baby 4',
-						phone:'7352319309',
-						age:25,
-						bio:'Soy bien pro haciendo web components'
+						image:"assets/img/4.jpg",
+						name:'La Chupitos',
+						phone:'34534534',
+						age:15,
+						bio:'Me la paso todo el dia pegaga al shupe ...... oie cii'
 					}					
 				]
 
@@ -136,13 +148,15 @@
 					chip.appendChild(span);
 
 					chip.addEventListener('click',()=>{
-						this._sayHi(contact.id,contacts);
+						this._setInfo(contact.id,contacts);
 					});
 
 
 
 					container.appendChild(chip);
 				}
+
+				this._setInfo(0,contacts);
 				// this.chipText = this.chipText;
 				// this.chipSrc = this.chipSrc;
 
@@ -163,6 +177,7 @@
 		}
 
 		customElements.define('contact-chip',ContactChip);
+
 
 	})(window.customElements);
 </script>
